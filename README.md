@@ -37,6 +37,38 @@ python python yolov5-plate_rknnlite.py --input ../imgs/京A25016_32.jpg --model 
 
 ![result](imgs/result.jpg)
 
+## C++代码推理测试
+
+```bash
+cd cpp
+bash build-linux_RK3588.sh # 在RK3588上直接编译
+cd build
+./rknn_yolov5_demo  ../../weights/car_plate_detect_1x3x80x80x16-640-640_rm_transpose_rk3588.rknn ../../imgs/沪A5L320.jpg 
+
+# 运行结果:
+post process config: box_conf_threshold = 0.25, nms_threshold = 0.45
+Loading mode...
+sdk version: 1.6.0 (9a7b5d24c@2023-12-13T17:31:11) driver version: 0.9.2
+model input num: 1, output num: 3
+  index=0, name=input, n_dims=4, dims=[1, 640, 640, 3], n_elems=1228800, size=1228800, w_stride = 640, size_with_stride=1228800, fmt=NHWC, type=INT8, qnt_type=AFFINE, zp=-128, scale=0.003922
+  index=0, name=output, n_dims=5, dims=[1, 3, 80, 80, 16], n_elems=307200, size=307200, w_stride = 0, size_with_stride=307200, fmt=UNDEFINED, type=INT8, qnt_type=AFFINE, zp=63, scale=0.176689
+  index=1, name=975, n_dims=5, dims=[1, 3, 40, 40, 16], n_elems=76800, size=76800, w_stride = 0, size_with_stride=76800, fmt=UNDEFINED, type=INT8, qnt_type=AFFINE, zp=44, scale=0.161176
+  index=2, name=987, n_dims=5, dims=[1, 3, 20, 20, 16], n_elems=19200, size=19200, w_stride = 0, size_with_stride=19200, fmt=UNDEFINED, type=INT8, qnt_type=AFFINE, zp=84, scale=0.329176
+model is NHWC input fmt
+model input height=640, width=640, channel=3
+Read ../../imgs/沪A5L320.jpg ...
+img width = 1920, img height = 1080
+resize image with letterbox
+once run use 35.621000 ms
+loadLabelName ../../weights/plate.txt
+car @ (465 279 1059 735) 0.875814
+Single-L @ (762 672 882 720) 0.867393
+save detect result to ./out.jpg
+loop count = 10 , average run  29.781800 ms
+```
+
+![detection result](./imgs/out.jpg)
+
 ## 模型转换说明
 在导出onnx模型时，由于输出的尺度不一样，特别说明一下，截断得到3输出，尺寸是(1, 3, 80, 80, 16)
 
@@ -60,4 +92,4 @@ python python yolov5-plate_rknnlite.py --input ../imgs/京A25016_32.jpg --model 
 
 
 # 参考
-- https://github.com/we0091234/Car_recognitionhttps://github.com/we0091234/Car_recognition 
+- https://github.com/we0091234/Car_recognition 
