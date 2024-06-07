@@ -29,10 +29,14 @@ python 使用的模型尺寸
 
 
 ## python推理测试
+
+实现了车牌检测, 车牌矫正,双层和单层车牌的预处理以及车牌识别
+
 ```bash
 # python
 cd python
-python python yolov5-plate_rknnlite.py --input ../imgs/京A25016_32.jpg --model ../weights/car_plate_detect_1x3x80x80x16-640-640_rm_transpose_rk3588.rknn
+python plate_detection_rec_rknnlite.py --input ../imgs/double_yellow.jpg 
+
 ```
 
 ![result](imgs/result.jpg)
