@@ -1,4 +1,4 @@
-# RK3588 yolov5-face RKNPU 人脸检测
+# RK3588 车牌检测与识别 RKNPU推理
 
 ## 介绍
 基于[yolov5-face-RK3588](https://github.com/YaoQ/yolov5-face-RK3588),在RK3588上运行[car recognition](https://github.com/we0091234/Car_recognition)检测模型,实现车辆+车牌检测,并输出车牌的4个landmark点,用于车牌识别之前的矫正.
